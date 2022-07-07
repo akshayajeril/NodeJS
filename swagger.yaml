@@ -1,0 +1,222 @@
+openapi: 3.0.0
+info:
+  title: job-API
+  contact:
+    url: ''
+  version: '1.0'
+servers:
+- url: https://job-api-crud.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+      - auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginrequest'
+            example:
+              email: admin@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+      - auth
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerrequest'
+            example:
+              email: admin@gmail.com
+              name: Johny
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    get:
+      tags:
+      - job
+      summary: getAllJobs
+      operationId: getAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - job
+      summary: createJob
+      operationId: createJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createJobRequest'
+            example:
+              company: google
+              position: Assistant engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    get:
+      tags:
+      - job
+      summary: getAJob
+      operationId: getAJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+ 
+    patch:
+      tags:
+      - job
+      summary: updateJob
+      operationId: updateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateJobRequest'
+            example:
+              position: Junior system engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - job
+      summary: deleteJob
+      operationId: deleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    loginrequest:
+      title: loginrequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: admin@gmail.com
+        password: secret
+    registerrequest:
+      title: registerrequest
+      required:
+      - email
+      - name
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+      example:
+        email: admin@gmail.com
+        name: Johny
+        password: secret
+    createJobRequest:
+      title: createJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: google
+        position: Assistant engineer
+    updateJobRequest:
+      title: updateJobRequest
+      required:
+      - position
+      type: object
+      properties:
+        position:
+          type: string
+      example:
+        position: Junior system engineer
+    deleteJobRequest:
+      title: deleteJobRequest
+      required:
+      - position
+      type: object
+      properties:
+        position:
+          type: string
+      example:
+        position: Junior system engineer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: auth
+  description: ''
+- name: job
+  description: ''
